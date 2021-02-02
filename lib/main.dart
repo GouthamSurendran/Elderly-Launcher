@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getAllContacts() async {
-    List<Contact> _contacts = (await ContactsService.getContacts(withThumbnails: false)).toList();
+    List<Contact> _contacts = (await ContactsService.getContacts()).toList();
     setState(() {
       contacts = _contacts;
     });
@@ -74,10 +74,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index){
                     Contact contact = contacts[index];
                     return ListTile(
-                      title: Text(contact.displayName),
+                      title: Text(contact.displayName.isEmpty?" ":contact.displayName),
                       subtitle: Text(
-                        contact.phones.elementAt(0).value
+                        contact.phones.isEmpty?" ":contact.phones.elementAt(0).value
                       ),
+                      leading: (contact.avatar != null && contact.avatar.length>0)?
+                      CircleAvatar(
+                        backgroundImage: MemoryImage(contact.avatar),
+                      ):
+                      CircleAvatar(child: Text(contact.initials()),)
+                      ,
                     );
                   },
                 ),
