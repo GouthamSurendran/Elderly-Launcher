@@ -1,12 +1,12 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class ContactsPage extends StatefulWidget {
 
-  ContactsPage({Key key, this.title}) : super(key: key);
+  ContactsPage({Key key, this.title,this.contact}) : super(key: key);
   final String title;
+  final List<Contact> contact;
 
   @override
   _ContactsPageState createState() => _ContactsPageState();
@@ -18,20 +18,9 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   void initState(){
     super.initState();
-    getPermissions();
-  }
-
-  getPermissions() async{
-    if(await Permission.contacts.request().isGranted){
-      getAllContacts();
-    }
-  }
-
-  getAllContacts() async {
-    List<Contact> _contacts = (await ContactsService.getContacts()).toList();
     setState(() {
-      contacts = _contacts;
-  });
+      contacts = widget.contact;
+    });
   }
 
   Widget build(BuildContext context) {

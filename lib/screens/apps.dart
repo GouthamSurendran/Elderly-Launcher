@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:device_apps/device_apps.dart';
+import 'package:senior_launcher/screens/contacts.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:contacts_service/contacts_service.dart';
 
 class Apps extends StatefulWidget {
   @override
@@ -9,11 +12,13 @@ class Apps extends StatefulWidget {
 
 class _AppsState extends State<Apps> {
   BouncingScrollPhysics _bouncingScrollPhysics = BouncingScrollPhysics();
+  List<Contact> contacts = [];
 
   @override
   void initState(){
     super.initState();
-    // getAppsList();
+    getAppsList();
+    getPermissions();
   }
 
   getAppsList() async {
@@ -23,6 +28,23 @@ class _AppsState extends State<Apps> {
       includeSystemApps: true,
       onlyAppsWithLaunchIntent: true,
     );                // Uses the device_apps package to retrieve the apps installed in the phone
+  }
+
+  getPermissions() async{
+    if(await Permission.contacts.request().isGranted){
+      getAllContacts();
+    }
+  }
+
+  getAllContacts() async {
+    List<Contact> _contacts = (await ContactsService.getContacts()).toList();
+    setState(() {
+      contacts = _contacts;
+    });
+  }
+
+  filterContacts() {
+    //to be implemented
   }
 
 
@@ -74,7 +96,7 @@ class _AppsState extends State<Apps> {
                 );
               },
             ),
-          ],
+        ContactsPage(title: "Contacts",contact: contacts,) ],
         ),
       ),
     );
