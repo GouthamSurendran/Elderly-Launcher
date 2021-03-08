@@ -4,6 +4,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:senior_launcher/screens/contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Apps extends StatefulWidget {
   @override
@@ -13,21 +14,12 @@ class Apps extends StatefulWidget {
 class _AppsState extends State<Apps> {
   BouncingScrollPhysics _bouncingScrollPhysics = BouncingScrollPhysics();
   List<Contact> contacts = [];
+  List<String> allowedApps = ['Chrome','Phone','Messages','Youtube','Photos','Settings'];
 
   @override
   void initState(){
     super.initState();
-    getAppsList();
     getPermissions();
-  }
-
-  getAppsList() async {
-    List<Application> _apps = await DeviceApps.getInstalledApplications
-      (
-      includeAppIcons: true,
-      includeSystemApps: true,
-      onlyAppsWithLaunchIntent: true,
-    );                // Uses the device_apps package to retrieve the apps installed in the phone
   }
 
   getPermissions() async{
@@ -43,20 +35,15 @@ class _AppsState extends State<Apps> {
     });
   }
 
-  filterContacts() {
-    //to be implemented
-  }
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.blueAccent,
+        color: Color(0xffC0EDF7),
         child: PageView(
           children: <Widget>[
             Container(
               child: Center(
-                child: Text('Elderly Launcher',style: TextStyle(color: Colors.white,fontSize: 40),),
+                child: Text('Elderly \nLauncher',style: GoogleFonts.josefinSans(fontSize: 50,color: Colors.black87)),
               ),
             ),
             FutureBuilder(
@@ -68,20 +55,22 @@ class _AppsState extends State<Apps> {
               builder: (context,snapshot){
                 if (snapshot.connectionState == ConnectionState.done){
                   List<Application> allApps = snapshot.data;
+                  List<Application> filteredApps = allApps.where((app) => allowedApps.contains(app.appName)).toList();
 
                   return Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: GridView.count(crossAxisCount: 3,physics: _bouncingScrollPhysics,
-                    children:List.generate(allApps.length, (index) {
+                    child: GridView.count(crossAxisCount: 2,physics: _bouncingScrollPhysics,
+                    children:List.generate(filteredApps.length, (index) {
                         return GestureDetector(
                           onTap: (){
-                            DeviceApps.openApp(allApps[index].packageName);
+                            DeviceApps.openApp(filteredApps[index].packageName);
                           },
                           child: Column(
                             children: <Widget>[
-                              Image.memory((allApps[index] as ApplicationWithIcon).icon,width: 60,),
-                              Text("${allApps[index].appName}",style: TextStyle(
-                                color: Colors.white
+                              Image.memory((filteredApps[index] as ApplicationWithIcon).icon,width: 80,),
+                              SizedBox(height: 10),
+                              Text("${filteredApps[index].appName}",style: TextStyle(
+                                color: Colors.black87, fontSize: 20, fontWeight: FontWeight.w600
                               ),)
                             ],
                           ),
@@ -91,7 +80,9 @@ class _AppsState extends State<Apps> {
                 }
                 return Container(
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                    ),
                   ),
                 );
               },

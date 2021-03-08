@@ -37,7 +37,8 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Center(child: Text(widget.title,style: TextStyle(color: Colors.black87,fontSize: 20),)),
+        backgroundColor: Color(0xffC0EDF7),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -60,7 +61,7 @@ class _ContactsPageState extends State<ContactsPage> {
                       children: <Widget>[
                         (contact.avatar != null && contact.avatar.length > 0)
                             ? CircleAvatar(
-                                radius: 50,
+                                radius: 55,
                                 backgroundImage: MemoryImage(contact.avatar),
                               )
                             : CircleAvatar(

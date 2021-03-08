@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  google_fonts: ^2.0.0
   permission_handler: ^5.0.1+1
   contacts_service: ^0.4.6
   device_apps: ^1.2.0
