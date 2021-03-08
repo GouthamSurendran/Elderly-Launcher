@@ -1,10 +1,10 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactsPage extends StatefulWidget {
-
-  ContactsPage({Key key, this.title,this.contact}) : super(key: key);
+  ContactsPage({Key key, this.title, this.contact}) : super(key: key);
   final String title;
   final List<Contact> contact;
 
@@ -14,13 +14,24 @@ class ContactsPage extends StatefulWidget {
 
 class _ContactsPageState extends State<ContactsPage> {
   List<Contact> contacts = [];
+  List<Contact> filteredContacts = [];
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     setState(() {
       contacts = widget.contact;
+      filteredContacts = contacts
+          .where((i) => i.avatar != null && i.avatar.length > 0)
+          .toList();
     });
+  }
+
+  void callLaunch(phoneNo) async {
+    if (await canLaunch(phoneNo)) {
+      await launch(phoneNo);
+    } else
+      print("Error in calling the number $phoneNo");
   }
 
   Widget build(BuildContext context) {
@@ -28,33 +39,47 @@ class _ContactsPageState extends State<ContactsPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body:
-      Padding(
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Text(
-              'Contacts List',
-            ),
             Expanded(
-              child: ListView.builder(
+              child: GridView.count(
+                physics: BouncingScrollPhysics(),
+                crossAxisCount: 2,
                 shrinkWrap: true,
-                itemCount: contacts.length,
-                itemBuilder: (context, index){
-                  Contact contact = contacts[index];
-                  return ListTile(
-                    title: Text(contact.displayName.isEmpty?" ":contact.displayName),
-                    subtitle: Text(
-                        contact.phones.isEmpty?" ":contact.phones.elementAt(0).value
+                mainAxisSpacing: 5,
+                children: List.generate(filteredContacts.length, (index) {
+                  Contact contact = filteredContacts[index];
+                  return InkWell(
+                    onTap: () {
+                      callLaunch(
+                          'tel: ${contact.phones.isEmpty ? " " : contact.phones.elementAt(0).value}');
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        (contact.avatar != null && contact.avatar.length > 0)
+                            ? CircleAvatar(
+                                radius: 50,
+                                backgroundImage: MemoryImage(contact.avatar),
+                              )
+                            : CircleAvatar(
+                                child: Text(contact.initials()),
+                              ),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              contact.displayName.isEmpty
+                                  ? " "
+                                  : contact.displayName,
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    leading: (contact.avatar != null && contact.avatar.length>0)?
-                    CircleAvatar(
-                      backgroundImage: MemoryImage(contact.avatar),
-                    ):
-                    CircleAvatar(child: Text(contact.initials()),)
-                    ,
                   );
-                },
+                }),
               ),
             )
           ],
