@@ -5,6 +5,7 @@ import 'package:senior_launcher/screens/contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:senior_launcher/screens/medsRem.dart';
 
 class Apps extends StatefulWidget {
   @override
@@ -87,7 +88,10 @@ class _AppsState extends State<Apps> {
                 );
               },
             ),
-        ContactsPage(title: "Contacts",contact: contacts,) ],
+        ContactsPage(title: "Contacts",contact: contacts,),
+        MedsRem()
+
+          ],
         ),
       ),
     );
