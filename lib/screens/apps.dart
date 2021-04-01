@@ -6,6 +6,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:senior_launcher/screens/medsRem.dart';
+import 'package:intl/intl.dart';
+import 'dart:async';
+
+import 'package:senior_launcher/widgets.dart';
 
 class Apps extends StatefulWidget {
   @override
@@ -16,6 +20,7 @@ class _AppsState extends State<Apps> {
   BouncingScrollPhysics _bouncingScrollPhysics = BouncingScrollPhysics();
   List<Contact> contacts = [];
   List<String> allowedApps = ['Chrome','Phone','Messages','Youtube','Photos','Settings'];
+  String _timeString;
 
   @override
   void initState(){
@@ -42,11 +47,7 @@ class _AppsState extends State<Apps> {
         color: Color(0xffC0EDF7),
         child: PageView(
           children: <Widget>[
-            Container(
-              child: Center(
-                child: Text('Elderly \nLauncher',style: GoogleFonts.josefinSans(fontSize: 50,color: Colors.black87)),
-              ),
-            ),
+            TimeWidget(),
             FutureBuilder(
               future: DeviceApps.getInstalledApplications(
                 includeSystemApps: true,
