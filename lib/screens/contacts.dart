@@ -1,6 +1,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactsPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text(widget.title,style: TextStyle(color: Colors.black87,fontSize: 20),)),
+        title: Center(child: Text(widget.title,style: GoogleFonts.josefinSans(color: Colors.black87,fontSize: 20),)),
         backgroundColor: Color(0xffC0EDF7),
       ),
       body: Padding(

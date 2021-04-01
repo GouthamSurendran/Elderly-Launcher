@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:senior_launcher/screens/medsList.dart';
 import 'package:senior_launcher/widgets.dart';
 
 class MedsRem extends StatefulWidget {
@@ -36,17 +37,32 @@ class _MedsRemState extends State<MedsRem> {
             SizedBox(
               height: 30,
             ),
-            CardWidget(
-              title: "Morning",
-              isDone: true,
+            InkWell(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 0,)));
+              },
+              child: CardWidget(
+                title: "Morning",
+                isDone: true,
+              ),
             ),
-            CardWidget(
-              title: "Afternoon",
-              isDone: false,
+            InkWell(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 1,)));
+              },
+              child: CardWidget(
+                title: "Afternoon",
+                isDone: false,
+              ),
             ),
-            CardWidget(
-              title: "Night",
-              isDone: false,
+            InkWell(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 2,)));
+              },
+              child: CardWidget(
+                title: "Night",
+                isDone: false,
+              ),
             ),
             Expanded(
               child: Align(

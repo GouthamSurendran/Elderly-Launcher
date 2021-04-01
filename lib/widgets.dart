@@ -11,28 +11,28 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 10, bottom: 15),
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-        decoration: BoxDecoration(
-            color: isDone ? Colors.white38 : Colors.white,
-            borderRadius: BorderRadius.circular(20)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                  fontSize: 26,
-                  color: Colors.black54,
-                  fontWeight: FontWeight.w700),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(isDone ? "Done" : "Not Taken")
-          ],
-        ),
+      margin: EdgeInsets.only(top: 10, bottom: 15),
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      decoration: BoxDecoration(
+          color: isDone ? Colors.white38 : Colors.white,
+          borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 26,
+                color: Colors.black54,
+                fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(isDone ? "Done" : "Not Taken")
+        ],
+      ),
     );
   }
 }
@@ -83,16 +83,3 @@ class _TimeWidgetState extends State<TimeWidget> {
   }
 }
 
-class MedList extends StatelessWidget {
-
-  final String medName;
-  final bool hasTaken;
-  final String desc;
-
-  MedList({this.medName,this.hasTaken,this.desc});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}

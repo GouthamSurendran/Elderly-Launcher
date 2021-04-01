@@ -4,11 +4,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:senior_launcher/screens/contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:senior_launcher/screens/medsRem.dart';
-import 'package:intl/intl.dart';
-import 'dart:async';
-
 import 'package:senior_launcher/widgets.dart';
 
 class Apps extends StatefulWidget {
@@ -91,7 +87,6 @@ class _AppsState extends State<Apps> {
             ),
         ContactsPage(title: "Contacts",contact: contacts,),
         MedsRem()
-
           ],
         ),
       ),

@@ -3,10 +3,11 @@ class Medicine {
   final String name;
   final int timeOfDayId;
   final int hasTaken;
+  final String desc;
 
-  Medicine({this.id,this.name,this.timeOfDayId,this.hasTaken});
+  Medicine({this.id,this.name,this.desc,this.timeOfDayId,this.hasTaken});
 
   Map<String, dynamic> toMap(){
-    return {"id":id,"name":name,"timeOfDayId":timeOfDayId,"hasTaken":hasTaken};
+    return {"id":id,"name":name,"desc":desc,"timeOfDayId":timeOfDayId,"hasTaken":hasTaken};
   }
 }
