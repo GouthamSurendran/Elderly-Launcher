@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MedsWidget extends StatelessWidget {
   final String medName;
-  final bool hasTaken;
+  final int hasTaken;
   final String desc;
 
   MedsWidget({this.medName, this.hasTaken, this.desc});
@@ -25,7 +25,7 @@ class MedsWidget extends StatelessWidget {
               color: Color(0xff2F2F2F),
               fontWeight: FontWeight.bold,
               decoration:
-              hasTaken ? TextDecoration.lineThrough : TextDecoration.none,
+              hasTaken == 1 ? TextDecoration.lineThrough : TextDecoration.none,
             ),
           ),
           SizedBox(
