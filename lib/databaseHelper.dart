@@ -35,5 +35,39 @@ class DatabaseHelper {
       );
     });
   }
+
+  Future<void> updateMed(int id,name,desc) async{
+    Database _db = await database();
+    await _db.rawUpdate("UPDATE meds SET name='$name',desc='$desc' WHERE id='$id'");
+  }
+
+  Future<void> deleteMed(int id) async{
+    Database _db = await database();
+    await _db.rawDelete("DELETE FROM meds WHERE id='$id'");
+  }
+
+  Future<int> getHasTaken(int timeOfDayId) async{
+    Database _db = await database();
+    List<Map<String,dynamic>> hasTakenList = await _db.rawQuery("SELECT hasTaken from meds WHERE timeOfDayId='$timeOfDayId'");
+    dynamic hasTaken = hasTakenList[0]['hasTaken'];
+    return hasTaken;
+  }
+
+  Future<int> markAsTaken(int timeOfDayId) async{
+    Database _db = await database();
+    dynamic hasTaken = await getHasTaken(timeOfDayId);
+    if (hasTaken == 0){
+      hasTaken = 1;
+      await _db.rawUpdate("UPDATE meds SET hasTaken='$hasTaken' WHERE timeOfDayId='$timeOfDayId'");
+    }
+    else {
+      hasTaken = 0;
+      await _db.rawUpdate("UPDATE meds SET hasTaken='$hasTaken' WHERE timeOfDayId='$timeOfDayId'");
+    }
+    return hasTaken;
+  }
+
 }
+
+
 

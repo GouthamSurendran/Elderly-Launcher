@@ -16,7 +16,6 @@ class _AppsState extends State<Apps> {
   BouncingScrollPhysics _bouncingScrollPhysics = BouncingScrollPhysics();
   List<Contact> contacts = [];
   List<String> allowedApps = ['Chrome','Phone','Messages','Youtube','Photos','Settings'];
-  String _timeString;
 
   @override
   void initState(){

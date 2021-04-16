@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CardWidget extends StatelessWidget {
   final String title;
-  final bool isDone;
+  final int isDone;
 
   CardWidget({this.title, this.isDone});
   @override
@@ -15,7 +15,7 @@ class CardWidget extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       decoration: BoxDecoration(
-          color: isDone ? Colors.white38 : Colors.white,
+          color: isDone ==1 ? Colors.white38 : Colors.white,
           borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +30,7 @@ class CardWidget extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text(isDone ? "Done" : "Not Taken")
+          Text(isDone == 1 ? "Done" : "Not Taken")
         ],
       ),
     );

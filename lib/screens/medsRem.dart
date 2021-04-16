@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior_launcher/screens/medsList.dart';
 import 'package:senior_launcher/widgets.dart';
+import 'package:senior_launcher/databaseHelper.dart';
 
 class MedsRem extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class MedsRem extends StatefulWidget {
 }
 
 class _MedsRemState extends State<MedsRem> {
+
+  int isDone1;
+  int isDone2;
+  int isDone3;
+  DatabaseHelper _dbHelper = DatabaseHelper();
+
   final DateTime date = DateTime.now();
   final List<String> weekdays = [
     'Monday',
@@ -18,6 +25,20 @@ class _MedsRemState extends State<MedsRem> {
     'Saturday',
     'Sunday'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    getHasTaken();
+  }
+
+  void getHasTaken() async{
+    isDone1 = await _dbHelper.getHasTaken(0);
+    isDone2 = await _dbHelper.getHasTaken(1);
+    isDone3 = await _dbHelper.getHasTaken(2);
+    setState(() {
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +59,30 @@ class _MedsRemState extends State<MedsRem> {
               height: 30,
             ),
             InkWell(
-              onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 0,)));
+              onTap: () {
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 0))).then((value) => getHasTaken());
               },
               child: CardWidget(
                 title: "Morning",
-                isDone: true,
+                isDone: isDone1,
               ),
             ),
             InkWell(
               onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 1,)));
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 1))).then((value) => getHasTaken());
               },
               child: CardWidget(
                 title: "Afternoon",
-                isDone: false,
+                isDone: isDone2,
               ),
             ),
             InkWell(
               onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 2,)));
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 2))).then((value) => getHasTaken());
               },
               child: CardWidget(
                 title: "Night",
-                isDone: false,
+                isDone: isDone3,
               ),
             ),
             Expanded(

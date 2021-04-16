@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:senior_launcher/screens/contacts.dart';
 import 'package:senior_launcher/screens/apps.dart';
 
 void main() {
