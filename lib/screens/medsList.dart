@@ -22,7 +22,7 @@ getTimeOfDay(int t) {
 
 class _MedsListState extends State<MedsList> {
   int _timeOfDay;
-  dynamic _hasTaken ;
+  dynamic _hasTaken;
 
   FocusNode _nameFocus;
   FocusNode _descFocus;
@@ -51,7 +51,8 @@ class _MedsListState extends State<MedsList> {
     descController.dispose();
     super.dispose();
   }
-  void getHasTaken() async{
+
+  void getHasTaken() async {
     _hasTaken = await _dbHelper.getHasTaken(_timeOfDay);
     setState(() {});
   }
@@ -62,9 +63,11 @@ class _MedsListState extends State<MedsList> {
         builder: (context) {
           return AlertDialog(
             content: Container(
-              height: 100,
+              height: 150,
               child: Column(
                 children: [
+                  Text("Edit Medicine",style: TextStyle(fontSize: 19,fontWeight: FontWeight.w500),),
+                  SizedBox(height: 20,),
                   TextField(
                     controller: editNameController
                       ..text = snapshot.data[index].name,
@@ -109,9 +112,11 @@ class _MedsListState extends State<MedsList> {
         builder: (context) {
           return AlertDialog(
             content: Container(
-              height: 100,
+              height: 150,
               child: Column(
                 children: [
+                  Text("Add Medicine",style: TextStyle(fontSize: 19,fontWeight: FontWeight.w500),),
+                  SizedBox(height: 20,),
                   TextField(
                     controller: nameController,
                     decoration:
@@ -132,8 +137,10 @@ class _MedsListState extends State<MedsList> {
                     insertMed();
                   }
                   Navigator.of(context).pop();
+                  nameController..text = "";
+                  descController..text = "";
                 },
-              )
+              ),
             ],
           );
         });
@@ -185,7 +192,7 @@ class _MedsListState extends State<MedsList> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.pop(context,_hasTaken);
+                          Navigator.pop(context, _hasTaken);
                         },
                         child: Icon(
                           IconData(58791,
@@ -247,11 +254,12 @@ class _MedsListState extends State<MedsList> {
       ),
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.greenAccent,
-        onPressed: (){
+        onPressed: () {
           markAsTaken();
         },
-        child: Icon(
-            _hasTaken == 1 ? IconData(61826, fontFamily: 'MaterialIcons') : IconData(59087, fontFamily: 'MaterialIcons')),
+        child: Icon(_hasTaken == 1
+            ? IconData(61826, fontFamily: 'MaterialIcons')
+            : IconData(59087, fontFamily: 'MaterialIcons')),
         backgroundColor: Colors.green,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

@@ -29,13 +29,17 @@ class _MedsRemState extends State<MedsRem> {
   @override
   void initState() {
     super.initState();
-    getHasTaken();
+    getHasTaken(0);
+    getHasTaken(1);
+    getHasTaken(2);
+
   }
 
-  void getHasTaken() async{
+  void getHasTaken(int day) async{
+    if(day == 0)
     isDone1 = await _dbHelper.getHasTaken(0);
-    isDone2 = await _dbHelper.getHasTaken(1);
-    isDone3 = await _dbHelper.getHasTaken(2);
+    else if (day == 1) isDone2 = await _dbHelper.getHasTaken(1);
+    else isDone3 = await _dbHelper.getHasTaken(2);
     setState(() {
     });
   }
@@ -60,7 +64,7 @@ class _MedsRemState extends State<MedsRem> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 0))).then((value) => getHasTaken());
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 0))).then((value) => getHasTaken(0));
               },
               child: CardWidget(
                 title: "Morning",
@@ -69,7 +73,7 @@ class _MedsRemState extends State<MedsRem> {
             ),
             InkWell(
               onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 1))).then((value) => getHasTaken());
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 1))).then((value) => getHasTaken(1));
               },
               child: CardWidget(
                 title: "Afternoon",
@@ -78,7 +82,7 @@ class _MedsRemState extends State<MedsRem> {
             ),
             InkWell(
               onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 2))).then((value) => getHasTaken());
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 2))).then((value) => getHasTaken(2));
               },
               child: CardWidget(
                 title: "Night",

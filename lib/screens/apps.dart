@@ -38,6 +38,7 @@ class _AppsState extends State<Apps> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         color: Color(0xffC0EDF7),
         child: PageView(
