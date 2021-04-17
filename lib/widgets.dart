@@ -69,7 +69,7 @@ class _TimeWidgetState extends State<TimeWidget> {
             child: Center(
               child: Text(_timeString,
                   style: GoogleFonts.josefinSans(
-                      fontSize: 54,
+                      fontSize: 48,
                       color: Color(0xff333333),
                       fontWeight: FontWeight.w600)),
             ),
@@ -126,7 +126,7 @@ class NewsItem extends StatelessWidget {
                         children: [
                           // Padding(padding: EdgeInsets.only(top: 0)),
                           Container(
-                            padding: EdgeInsets.only(top: 30),
+                            padding: EdgeInsets.only(top: 20,bottom: 0),
                             width: 190,
                             child: Text(heading,style: TextStyle(fontWeight: FontWeight.bold),),
                           ),

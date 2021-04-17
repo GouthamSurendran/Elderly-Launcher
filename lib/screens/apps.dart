@@ -14,6 +14,7 @@ class Apps extends StatefulWidget {
 }
 
 class _AppsState extends State<Apps> {
+  PageController _controller;
   BouncingScrollPhysics _bouncingScrollPhysics = BouncingScrollPhysics();
   List<Contact> contacts = [];
   List<String> allowedApps = ['Chrome','Phone','Messages','Youtube','Photos','Settings'];
@@ -21,6 +22,7 @@ class _AppsState extends State<Apps> {
   @override
   void initState(){
     super.initState();
+    _controller = PageController(initialPage: 1);
     getPermissions();
   }
 
@@ -43,6 +45,7 @@ class _AppsState extends State<Apps> {
       body: Container(
         color: Color(0xffC0EDF7),
         child: PageView(
+          controller: _controller,
           children: <Widget>[
             NewsFeed(),
             TimeWidget(),

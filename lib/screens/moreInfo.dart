@@ -29,6 +29,9 @@ class MoreInfo extends StatelessWidget {
         body: Container(
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 child: Image.network(imgUrl),
                 height: 200,
