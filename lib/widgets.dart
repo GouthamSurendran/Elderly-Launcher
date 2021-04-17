@@ -62,14 +62,14 @@ class _TimeWidgetState extends State<TimeWidget> {
 
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 250),
+      padding: const EdgeInsets.only(top: 250,left: 10,right: 10),
       child: Column(
         children: [
           Container(
             child: Center(
               child: Text(_timeString,
                   style: GoogleFonts.josefinSans(
-                      fontSize: 55,
+                      fontSize: 54,
                       color: Color(0xff333333),
                       fontWeight: FontWeight.w600)),
             ),
@@ -96,60 +96,61 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 185,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      height: 190,
         child: Card(
-          margin: EdgeInsets.only(bottom: 2 ,top: 0),
+          margin: EdgeInsets.only(top: 6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)
           ),
-          elevation: 1,
+          elevation: 0.75,
           shadowColor: Colors.grey,
           color: Colors.white,
-          child: Column(
-              children: [
-                // Container(
-                //   child: Text(heading),
-                // ),
-                Row(children: [
-                  Container(
-                    child: Image.network(imgUrl),
-                    height: 150,
-                    width: 170,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        // Padding(padding: EdgeInsets.only(top: 0)),
-                        Container(
-                          width: 200,
-                          child: Text(heading,style: TextStyle(fontWeight: FontWeight.bold),),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
-                        TextButton(
-                          child: Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
-                          onPressed: () {
-                            // this builds a new window with current news's content as argument
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return MoreInfo(author,heading,imgUrl,content,fullUrl);
-                            }));
-                          },
-                        )
-                      ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10,bottom: 0),
+            child: Column(
+                children: [
+                  // Container(
+                  //   child: Text(heading),
+                  // ),
+                  Row(children: [
+                    Container(
+                      child: Image.network(imgUrl),
+                      height: 150,
+                      width: 170,
                     ),
-                  )
-                ]),
-              ]
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          // Padding(padding: EdgeInsets.only(top: 0)),
+                          Container(
+                            padding: EdgeInsets.only(top: 30),
+                            width: 190,
+                            child: Text(heading,style: TextStyle(fontWeight: FontWeight.bold),),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
+                          TextButton(
+                            child: Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
+                            onPressed: () {
+                              // this builds a new window with current news's content as argument
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return MoreInfo(author,heading,imgUrl,content,fullUrl);
+                              }));
+                            },
+                          )
+                        ],
+                      ),
+                    )
+                  ]),
+                ]
+            ),
           ),
         ),
-      ),
     );
   }
 }

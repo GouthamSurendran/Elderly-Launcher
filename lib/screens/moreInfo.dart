@@ -36,16 +36,22 @@ class MoreInfo extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(left: 10,top: 30,right: 2),
+                child: Text(heading==null?"Breaking News":heading,style: TextStyle(
+                    fontSize: 18, fontWeight: FontWeight.bold
+                ),),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10,top: 20,right: 2),
                 child: Text(content==null?"No desc":content,style: TextStyle(
                   fontSize: 16
                 ),),
               ),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
               Container(
                 padding: EdgeInsets.only(left: 10),
-                child: InkWell(child: Text("Full article at $fullUrl",style: TextStyle(fontSize: 15),),
+                child: InkWell(child: Text("Full article at $fullUrl",style: TextStyle(fontSize: 15,color: Colors.blueAccent),),
                 onTap: (){
                   launch(fullUrl);
                 },),

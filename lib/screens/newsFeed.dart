@@ -15,6 +15,7 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
   @override
   bool get wantKeepAlive => true;
   List<Widget> newsItems = [];
+  int numNews;
 
   Future getNews() async {
     newsItems.clear();
@@ -35,7 +36,6 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
         else
           ur = data["articles"][i]["urlToImage"];
         newsItems.add(NewsItem(auth, data["articles"][i]["title"], ur,data["articles"][i]["url"],data["articles"][i]["content"]));
-        // print(data["articles"][i]["description"]);
       }
       return newsItems;
     }
@@ -49,10 +49,10 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
   @override
   void initState() {
     super.initState();
-    //helper();
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -71,10 +71,6 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
             },
             future: getNews(),
           ),
-          // child: ListView(
-          //   physics: BouncingScrollPhysics(),
-          //   children: newsItems,
-          // ),
           onRefresh: () {
             return getNews();
           },

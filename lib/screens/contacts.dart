@@ -36,6 +36,7 @@ class _ContactsPageState extends State<ContactsPage> with AutomaticKeepAliveClie
       print("Error in calling the number $phoneNo");
   }
 
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -62,13 +63,26 @@ class _ContactsPageState extends State<ContactsPage> with AutomaticKeepAliveClie
                     child: Column(
                       children: <Widget>[
                         (contact.avatar != null && contact.avatar.length > 0)
-                            ? CircleAvatar(
-                                radius: 55,
-                                backgroundImage: MemoryImage(contact.avatar),
+                            ? Card(
+                                semanticContainer: true,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: Image.memory(contact.avatar,fit: BoxFit.fill,),
+                                elevation: 5,
+                                shadowColor: Colors.grey,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)
+                                ),
                               )
-                            : CircleAvatar(
-                                child: Text(contact.initials()),
-                              ),
+                            : Card(
+                          semanticContainer: true,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          child: Text(contact.initials()),
+                          elevation: 5,
+                          shadowColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)
+                          ),
+                        ),
                         Expanded(
                           child: Center(
                             child: Text(
