@@ -13,7 +13,8 @@ class ContactsPage extends StatefulWidget {
   _ContactsPageState createState() => _ContactsPageState();
 }
 
-class _ContactsPageState extends State<ContactsPage> {
+class _ContactsPageState extends State<ContactsPage> with AutomaticKeepAliveClientMixin <ContactsPage>{
+
   List<Contact> contacts = [];
   List<Contact> filteredContacts = [];
 
@@ -89,4 +90,7 @@ class _ContactsPageState extends State<ContactsPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

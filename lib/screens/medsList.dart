@@ -24,8 +24,8 @@ class _MedsListState extends State<MedsList> {
   int _timeOfDay;
   dynamic _hasTaken;
 
-  FocusNode _nameFocus;
-  FocusNode _descFocus;
+  FocusNode _desc1Focus;
+  FocusNode _desc2Focus;
 
   final nameController = TextEditingController();
   final descController = TextEditingController();
@@ -40,13 +40,13 @@ class _MedsListState extends State<MedsList> {
     _timeOfDay = widget.tDay;
     getHasTaken();
 
-    _nameFocus = FocusNode();
-    _descFocus = FocusNode();
+    _desc1Focus = FocusNode();
+    _desc2Focus = FocusNode();
   }
 
   void dispose() {
-    _nameFocus.dispose();
-    _descFocus.dispose();
+    _desc1Focus.dispose();
+    _desc2Focus.dispose();
     nameController.dispose();
     descController.dispose();
     super.dispose();
@@ -71,8 +71,12 @@ class _MedsListState extends State<MedsList> {
                   TextField(
                     controller: editNameController
                       ..text = snapshot.data[index].name,
+                    onSubmitted: (value){
+                      FocusScope.of(context).requestFocus(_desc1Focus);
+                    } ,
                   ),
                   TextField(
+                    focusNode: _desc1Focus,
                     controller: editDescController
                       ..text = snapshot.data[index].desc,
                   )
@@ -121,8 +125,12 @@ class _MedsListState extends State<MedsList> {
                     controller: nameController,
                     decoration:
                         InputDecoration(hintText: "Enter Medicine Name"),
+                    onSubmitted: (value){
+                      FocusScope.of(context).requestFocus(_desc2Focus);
+                    },
                   ),
                   TextField(
+                    focusNode: _desc2Focus,
                     controller: descController,
                     decoration: InputDecoration(hintText: "Enter Description"),
                   )

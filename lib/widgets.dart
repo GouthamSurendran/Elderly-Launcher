@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:senior_launcher/screens/moreInfo.dart';
 
 class CardWidget extends StatelessWidget {
   final String title;
@@ -12,7 +13,7 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 10, bottom: 15),
-      width: double.infinity,
+      width: 300,
       padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       decoration: BoxDecoration(
           color: isDone ==1 ? Colors.white38 : Colors.white,
@@ -78,6 +79,73 @@ class _TimeWidgetState extends State<TimeWidget> {
                   style: GoogleFonts.josefinSans(
                       fontSize: 25, color: Colors.black87)))
         ],
+      ),
+    );
+  }
+}
+
+class NewsItem extends StatelessWidget {
+  NewsItem(this.author, this.heading, this.imgUrl,this.desc,this.fullUrl);
+
+  final imgUrl;
+  final heading;
+  final author;
+  final desc;
+  final fullUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 170,
+      child: Card(
+        margin: EdgeInsets.all(5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)
+        ),
+        elevation: 1,
+        shadowColor: Colors.grey,
+        color: Colors.white,
+        child: Column(
+            children: [
+              // Container(
+              //   child: Text(heading),
+              // ),
+              Row(children: [
+                Container(
+                  child: Image.network(imgUrl),
+                  height: 150,
+                  width: 170,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      // Padding(padding: EdgeInsets.only(top: 0)),
+                      Container(
+                        width: 200,
+                        child: Text(heading,style: TextStyle(fontWeight: FontWeight.bold),),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
+                      TextButton(
+                        child: Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
+                        onPressed: () {
+                          // this builds a new window with current news's content as argument
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return MoreInfo(author,heading,imgUrl,desc,fullUrl);
+                          }));
+                        },
+                      )
+                    ],
+                  ),
+                )
+              ]),
+            ]
+        ),
       ),
     );
   }
