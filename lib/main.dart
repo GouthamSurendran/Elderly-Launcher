@@ -6,7 +6,7 @@ import 'package:senior_launcher/screens/apps.dart';
 void main() {
   runApp(MyApp());
 }
-
+const PrimaryColor = const Color(0xffC0EDF7);
 class MyApp extends StatelessWidget {
 
   @override
@@ -15,10 +15,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Elderly',
       theme: ThemeData(
+        primaryColor: PrimaryColor,
         textTheme: GoogleFonts.josefinSansTextTheme(
           Theme.of(context).textTheme,
         ),
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: ContactsPage(title: 'Elderly'),

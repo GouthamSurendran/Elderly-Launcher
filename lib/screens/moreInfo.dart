@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MoreInfo extends StatelessWidget {
-  MoreInfo(this.author, this.heading, this.imgUrl,this.desc,this.fullUrl);
+  MoreInfo(this.author, this.heading, this.imgUrl,this.fullUrl,this.content);
   final imgUrl;
   final heading;
   final author;
-  final desc;
+  final content;
   final fullUrl;
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class MoreInfo extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xffC0EDF7),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -22,7 +24,7 @@ class MoreInfo extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          title: Text("More Info"),
+          title: Text("Source : $author",style: TextStyle(color: Colors.black87),),
         ),
         body: Container(
           child: Column(
@@ -32,26 +34,21 @@ class MoreInfo extends StatelessWidget {
                 height: 200,
                 width: MediaQuery.of(context).size.width,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text("by: $author"
-                    ),
-                  )
-                ],
-              ),
               Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(desc==null?"No desc":desc),
+                padding: EdgeInsets.only(left: 10,top: 30,right: 2),
+                child: Text(content==null?"No desc":content,style: TextStyle(
+                  fontSize: 16
+                ),),
               ),
               SizedBox(
-                height: 10,
+                height: 50,
               ),
               Container(
                 padding: EdgeInsets.only(left: 10),
-                child: Text("Full article at $fullUrl"),
+                child: InkWell(child: Text("Full article at $fullUrl",style: TextStyle(fontSize: 15),),
+                onTap: (){
+                  launch(fullUrl);
+                },),
               ),
             ],
           ),

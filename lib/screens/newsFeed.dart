@@ -34,10 +34,10 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
           ur = defaultImage;
         else
           ur = data["articles"][i]["urlToImage"];
-        newsItems.add(NewsItem(auth, data["articles"][i]["title"], ur,data["articles"][i]["description"],data["articles"][i]["url"]));
+        newsItems.add(NewsItem(auth, data["articles"][i]["title"], ur,data["articles"][i]["url"],data["articles"][i]["content"]));
         // print(data["articles"][i]["description"]);
       }
-      return data;
+      return newsItems;
     }
     else print("FAIL");
   }
@@ -49,7 +49,7 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
   @override
   void initState() {
     super.initState();
-    helper();
+    //helper();
   }
 
   @override
@@ -57,10 +57,24 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
-          child: ListView(
-            physics: BouncingScrollPhysics(),
-            children: newsItems,
+          child: FutureBuilder(
+            builder: (context,snap){
+                if (snap.connectionState == ConnectionState.none && snap.hasData == null){
+                  return Container();
+              }
+                return ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                    itemCount: newsItems.length,
+                    itemBuilder: (context,index){
+                      return newsItems[index];
+                });
+            },
+            future: getNews(),
           ),
+          // child: ListView(
+          //   physics: BouncingScrollPhysics(),
+          //   children: newsItems,
+          // ),
           onRefresh: () {
             return getNews();
           },
