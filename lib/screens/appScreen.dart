@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:senior_launcher/screens/addApps.dart';
+import 'package:senior_launcher/databaseHelper.dart';
+import 'package:senior_launcher/models/app.dart';
 
 class AppScreen extends StatefulWidget {
   @override
@@ -9,8 +11,23 @@ class AppScreen extends StatefulWidget {
 
 class _AppScreenState extends State<AppScreen> with AutomaticKeepAliveClientMixin <AppScreen>{
 
-  List<String> allowedApps = ['Chrome','Phone','Messages','Youtube','Photos','Settings'];
-  List<Application> filteredApps;
+  List<String> allowedApps = [];
+  DatabaseHelper _databaseHelper = DatabaseHelper();
+
+  Future getFilteredApps() async {
+    List<App> apps =  await _databaseHelper.getApps();
+    for(int i=0;i<apps.length;i++){
+      allowedApps.add(apps[i].appName);
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFilteredApps();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +41,7 @@ class _AppScreenState extends State<AppScreen> with AutomaticKeepAliveClientMixi
         builder: (context,snapshot){
           if (snapshot.connectionState == ConnectionState.done){
             List<Application> allApps = snapshot.data;
-            filteredApps = allApps.where((app) => allowedApps.contains(app.appName)).toList();
-            for(int i=0;i<filteredApps.length;i++){
-              print(filteredApps[i].packageName);
-            }
+            List<Application> filteredApps = allApps.where((app) => allowedApps.contains(app.appName)).toList();
 
             return Padding(
               padding: const EdgeInsets.all(20.0),
@@ -62,7 +76,7 @@ class _AppScreenState extends State<AppScreen> with AutomaticKeepAliveClientMixi
       ),
       floatingActionButton: InkWell(
         onLongPress: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddApps()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddApps())).then((value) => getFilteredApps());
         },
         child: FloatingActionButton(
           splashColor: Colors.greenAccent,

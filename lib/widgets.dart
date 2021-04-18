@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:senior_launcher/databaseHelper.dart';
 import 'package:senior_launcher/screens/moreInfo.dart';
+import 'package:senior_launcher/models/app.dart';
 
 class CardWidget extends StatelessWidget {
   final String title;
@@ -154,4 +156,70 @@ class NewsItem extends StatelessWidget {
     );
   }
 }
+
+class AppCheckBox extends StatefulWidget {
+  @override
+  _AppCheckBoxState createState() => _AppCheckBoxState();
+
+  final String appName;
+
+  AppCheckBox({this.appName});
+
+}
+
+class _AppCheckBoxState extends State<AppCheckBox> {
+
+  DatabaseHelper _databaseHelper = DatabaseHelper();
+
+  dynamic filteredApps = [];
+  dynamic _isAdded = false;
+
+  void getFilteredApps() async {
+    filteredApps =  await _databaseHelper.getApps();
+    int flg = 0;
+    for(int i=0;i<filteredApps.length;i++){
+      if (filteredApps[i].appName == widget.appName){
+        _isAdded  = true;
+        flg = 1;
+        break;
+      }
+    }
+    if (flg == 0) _isAdded = false;
+    setState(() {});
+  }
+
+  void addApp(App app) async {
+    await _databaseHelper.addApp(app);
+  }
+
+  void removeApp(App app) async {
+    String appName = app.appName;
+    await _databaseHelper.removeApp(appName);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFilteredApps();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Checkbox(
+          value: _isAdded,
+          onChanged: (bool value) async{
+            setState(() {
+              _isAdded = value;
+              App app = App(appName: widget.appName);
+              _isAdded == true? addApp(app): removeApp(app);
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
 

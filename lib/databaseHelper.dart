@@ -1,4 +1,5 @@
 import 'package:path/path.dart';
+import 'package:senior_launcher/models/app.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:senior_launcher/models/medicine.dart';
 
@@ -9,6 +10,9 @@ class DatabaseHelper {
       onCreate: (db,version) async {
         await db.execute(
             "CREATE TABLE meds(id INTEGER PRIMARY KEY, name TEXT, desc TEXT,timeOfDayId INTEGER, hasTaken INTEGER)",
+        );
+        await db.execute(
+          "CREATE TABLE apps(id INTEGER PRIMARY KEY, appName TEXT)",
         );
         return db;
       },
@@ -65,6 +69,29 @@ class DatabaseHelper {
       await _db.rawUpdate("UPDATE meds SET hasTaken='$hasTaken' WHERE timeOfDayId='$timeOfDayId'");
     }
     return hasTaken;
+  }
+
+  Future<void> addApp(App app) async {
+    Database _db = await database();
+    await _db.insert('apps',app.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+    print("App added");
+  }
+
+  Future<List<App>> getApps() async {
+    Database _db = await database();
+    List<Map<String, dynamic>> appsMap = await _db.rawQuery("SELECT * FROM apps");
+    return List.generate(appsMap.length, (index) {
+      return App(
+          id: appsMap[index]['id'],
+          appName: appsMap[index]['appName'],
+      );
+    });
+  }
+
+  Future<void> removeApp(String appName) async{
+    Database _db = await database();
+    await _db.rawDelete("DELETE FROM apps WHERE appName='$appName'");
   }
 
 }
