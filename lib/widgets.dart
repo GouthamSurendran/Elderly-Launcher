@@ -205,9 +205,8 @@ class _AppCheckBoxState extends State<AppCheckBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Checkbox(
+    return Container(
+      child: Checkbox(
           value: _isAdded,
           onChanged: (bool value) async{
             setState(() {
@@ -217,7 +216,6 @@ class _AppCheckBoxState extends State<AppCheckBox> {
             });
           },
         ),
-      ],
     );
   }
 }
