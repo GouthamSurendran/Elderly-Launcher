@@ -10,9 +10,7 @@ class MoreInfo extends StatelessWidget {
   final fullUrl;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xffC0EDF7),
           leading: IconButton(
@@ -46,7 +44,7 @@ class MoreInfo extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 10,top: 20,right: 2),
                 child: Text(content==null?"No desc":content,style: TextStyle(
-                  fontSize: 16
+                  fontSize: 18
                 ),),
               ),
               SizedBox(
@@ -62,7 +60,6 @@ class MoreInfo extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }

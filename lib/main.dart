@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:senior_launcher/screens/apps.dart';
+import 'package:senior_launcher/screens/pageView.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: ContactsPage(title: 'Elderly'),
-      home: Apps(),
+      home: Pview(),
     );
   }
 }

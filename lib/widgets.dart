@@ -96,13 +96,13 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190,
+      height: 200,
         child: Card(
           margin: EdgeInsets.only(top: 6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)
           ),
-          elevation: 0.75,
+          elevation: 0.25,
           shadowColor: Colors.grey,
           color: Colors.white,
           child: Padding(
@@ -131,7 +131,7 @@ class NewsItem extends StatelessWidget {
                             child: Text(heading,style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 16,
                           ),
                           Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
                           TextButton(

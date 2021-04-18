@@ -36,7 +36,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.HOME" /> // These two lines make the app appear as launcher
+                <category android:name="android.intent.category.HOME" />
+<!--                 These two lines make the app appear as launcher-->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -47,5 +48,8 @@
             android:value="2" />
     </application>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />  //permissions
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+<!--    permissions-->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
 </manifest>
