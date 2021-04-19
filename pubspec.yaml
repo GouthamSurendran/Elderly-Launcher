@@ -24,7 +24,7 @@ dependencies:
   google_fonts: ^2.0.0
   permission_handler: ^5.0.1+1
   contacts_service: ^0.4.6
-  device_apps: ^1.2.0
+  device_apps: ^2.1.0
   url_launcher: ^6.0.2
   intl: ^0.17.0
   sqflite: ^2.0.0+3

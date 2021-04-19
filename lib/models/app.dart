@@ -1,10 +1,10 @@
 class App {
   final int id;
-  final String appName;
+  final String packageName;
 
-  App({this.id,this.appName});
+  App({this.id,this.packageName});
 
   Map<String, dynamic> toMap(){
-    return {"id":id,"appName":appName};
+    return {"id":id,"packageName":packageName};
   }
 }

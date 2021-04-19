@@ -62,7 +62,7 @@ class _AddAppsState extends State<AddApps> {
                                   ),
 
                                   AppCheckBox(
-                                    appName: allApps[index].appName,
+                                    packageName: allApps[index].packageName,
                                   ),
                                   //checkbox for adding and deleting app in the database
                                 ],

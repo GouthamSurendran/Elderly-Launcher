@@ -12,7 +12,7 @@ class DatabaseHelper {
             "CREATE TABLE meds(id INTEGER PRIMARY KEY, name TEXT, desc TEXT,timeOfDayId INTEGER, hasTaken INTEGER)",
         );
         await db.execute(
-          "CREATE TABLE apps(id INTEGER PRIMARY KEY, appName TEXT)",
+          "CREATE TABLE apps(id INTEGER PRIMARY KEY, packageName TEXT)",
         );
         return db;
       },
@@ -75,7 +75,6 @@ class DatabaseHelper {
     Database _db = await database();
     await _db.insert('apps',app.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
-    print("App added");
   }
 
   Future<List<App>> getApps() async {
@@ -84,14 +83,14 @@ class DatabaseHelper {
     return List.generate(appsMap.length, (index) {
       return App(
           id: appsMap[index]['id'],
-          appName: appsMap[index]['appName'],
+          packageName: appsMap[index]['packageName'],
       );
     });
   }
 
-  Future<void> removeApp(String appName) async{
+  Future<void> removeApp(String packageName) async{
     Database _db = await database();
-    await _db.rawDelete("DELETE FROM apps WHERE appName='$appName'");
+    await _db.rawDelete("DELETE FROM apps WHERE packageName='$packageName'");
   }
 
 }

@@ -14,6 +14,7 @@ class NewsFeed extends StatefulWidget  {
 class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin <NewsFeed> {
   @override
   bool get wantKeepAlive => true;
+
   List<Widget> newsItems = [];
   int numNews;
 
@@ -39,7 +40,6 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin 
       }
       return newsItems;
     }
-    else print("FAIL");
   }
 
   void helper() async {

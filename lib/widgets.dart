@@ -130,7 +130,7 @@ class NewsItem extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(top: 20,bottom: 0),
                             width: 190,
-                            child: Text(heading,style: TextStyle(fontWeight: FontWeight.bold),),
+                            child: Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                           SizedBox(
                             height: 16,
@@ -161,9 +161,9 @@ class AppCheckBox extends StatefulWidget {
   @override
   _AppCheckBoxState createState() => _AppCheckBoxState();
 
-  final String appName;
+  final String packageName;
 
-  AppCheckBox({this.appName});
+  AppCheckBox({this.packageName});
 
 }
 
@@ -178,7 +178,7 @@ class _AppCheckBoxState extends State<AppCheckBox> {
     filteredApps =  await _databaseHelper.getApps();
     int flg = 0;
     for(int i=0;i<filteredApps.length;i++){
-      if (filteredApps[i].appName == widget.appName){
+      if (filteredApps[i].packageName == widget.packageName){
         _isAdded  = true;
         flg = 1;
         break;
@@ -193,8 +193,8 @@ class _AppCheckBoxState extends State<AppCheckBox> {
   }
 
   void removeApp(App app) async {
-    String appName = app.appName;
-    await _databaseHelper.removeApp(appName);
+    String packageName = app.packageName;
+    await _databaseHelper.removeApp(packageName);
   }
 
   @override
@@ -211,7 +211,7 @@ class _AppCheckBoxState extends State<AppCheckBox> {
           onChanged: (bool value) async{
             setState(() {
               _isAdded = value;
-              App app = App(appName: widget.appName);
+              App app = App(packageName: widget.packageName);
               _isAdded == true? addApp(app): removeApp(app);
             });
           },
