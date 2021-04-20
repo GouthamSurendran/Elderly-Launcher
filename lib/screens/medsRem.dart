@@ -33,11 +33,12 @@ class _MedsRemState extends State<MedsRem> {
     super.initState();
     getHasTaken(0);
     getHasTaken(1);
-    getHasTaken(2);
-    getDateFromSharedPreferences();
+    getHasTaken(2).then((value){
+      getDateFromSharedPreferences();
+    });
   }
 
-  void getHasTaken(int day) async{
+  Future<void> getHasTaken(int day) async{
     if(day == 0)
     isDone1 = await _dbHelper.getHasTaken(0);
     else if (day == 1) isDone2 = await _dbHelper.getHasTaken(1);
@@ -51,28 +52,21 @@ class _MedsRemState extends State<MedsRem> {
     final dateStampPref = prefs.getString('date');
     String currDate = DateFormat('d MMM').format(DateTime.now()).toString();
     if (dateStampPref != null) {
-      if (isDone1 == 1 && dateStampPref != ""){
-        _dbHelper.markAsTaken(0);
-        getHasTaken(0);
-        //print(dateStampPref);
+      if (isDone1 == 1 && dateStampPref != currDate){
+        await _dbHelper.markAsTaken(0).then((value) => getHasTaken(0));
       }
       if (isDone2 == 1 && dateStampPref != currDate){
-        _dbHelper.markAsTaken(1);
-        getHasTaken(1);
+        await _dbHelper.markAsTaken(1).then((value) => getHasTaken(1));
       }
       if (isDone3 == 1 && dateStampPref != currDate){
-        _dbHelper.markAsTaken(2);
-        getHasTaken(2);
+        await _dbHelper.markAsTaken(2).then((value) => getHasTaken(2));
       }
-      print("Reached here");
     }
-    print("GetSharePreferencesCAlled");
   }                               // Using Shared Preferences to get the date of last checked
 
   Future<void> setDate(String value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('date', value);
-    print(value);
   }
 
   @override
@@ -114,10 +108,11 @@ class _MedsRemState extends State<MedsRem> {
             InkWell(
               onTap: (){
                 Navigator.push(context,MaterialPageRoute(builder: (context)=>MedsList(tDay: 2))).then((value) {
-                  getHasTaken(2);
-                  if (isDone3 == 1){
+                  getHasTaken(2).then((value) {
+                    if (isDone3 == 1){
                       setDate(DateFormat('d MMM').format(DateTime.now()).toString());
-                  }
+                    }
+                  } );
                 }
                 );
               },
