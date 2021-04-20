@@ -14,15 +14,14 @@ class NewsFeed extends StatefulWidget {
   _NewsFeedState createState() => _NewsFeedState();
 }
 
-class _NewsFeedState extends State<NewsFeed> {
-  //bool get wantKeepAlive => true;
+class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin{
+  bool get wantKeepAlive => true;
 
   List<Widget> newsItems = [];
   int numNews;
 
   Future getNews() async {
     newsItems.clear();
-    int timeout = 5;
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
