@@ -22,14 +22,14 @@ Elderly Launcher is a Simplified, Uncomplicated android launcher that aims to ma
 
 &nbsp;
 
-<img src='./screenshots/1.png' width='250' padding-right='10px'> &nbsp;&nbsp; 
-<img src='./screenshots/2.png' width='250'>
+<img src='./screenshots/1.PNG' width='250' padding-right='10px'> &nbsp;&nbsp; 
+<img src='./screenshots/2.PNG' width='250'>
 <br><br>
 <img src='./screenshots/3.jpg' width='250'> &nbsp;&nbsp;
-<img src='./screenshots/7.png' width='250'>
+<img src='./screenshots/7.PNG' width='250'>
 <br><br>
-<img src='./screenshots/4.png' width='250'> &nbsp;&nbsp;
-<img src='./screenshots/5.png' width='250'>
+<img src='./screenshots/4.PNG' width='250'> &nbsp;&nbsp;
+<img src='./screenshots/5.PNG' width='250'>
 <br><br>
 
 
