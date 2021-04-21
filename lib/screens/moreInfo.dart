@@ -31,7 +31,7 @@ class MoreInfo extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                child: Image.network(imgUrl),
+                child: imgUrl==""?Image.asset('assets/error.jpg'):Image.network(imgUrl),
                 height: 200,
                 width: MediaQuery.of(context).size.width,
               ),

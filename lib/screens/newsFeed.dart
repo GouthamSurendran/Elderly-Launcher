@@ -14,44 +14,59 @@ class NewsFeed extends StatefulWidget {
   _NewsFeedState createState() => _NewsFeedState();
 }
 
-class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin{
+class _NewsFeedState extends State<NewsFeed>
+    with AutomaticKeepAliveClientMixin {
   bool get wantKeepAlive => true;
+  bool connectionExists;
 
   List<Widget> newsItems = [];
-  int numNews;
 
   Future getNews() async {
     newsItems.clear();
-    var response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      int numNews = data["totalResults"];
+    await http.get(Uri.parse(url)).then((response) {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
 
-      for (int i = 0; i < numNews; i++) {
-        String auth = "";
-        String ur = "";
-        if (data["articles"][i]["author"] == null)
-          auth = "Unknown author";
-        else
-          auth = data["articles"][i]["author"];
-        if (data["articles"][i]["urlToImage"] == null)
-          ur = defaultImage;
-        else
-          ur = data["articles"][i]["urlToImage"];
-        newsItems.add(NewsItem(auth, data["articles"][i]["title"], ur,
-            data["articles"][i]["url"], data["articles"][i]["content"]));
+        int count = data["articles"].length;
+        for (int i = count - 1; i >= 0; i--) {
+          String auth = "";
+          String ur = "";
+          if (data["articles"][i]["author"] == null)
+            auth = "Unknown author";
+          else
+            auth = data["articles"][i]["author"];
+          if (data["articles"][i]["urlToImage"] == null)
+            ur = defaultImage;
+          else
+            ur = data["articles"][i]["urlToImage"];
+          newsItems.add(NewsItem(auth, data["articles"][i]["title"], ur,
+              data["articles"][i]["url"], data["articles"][i]["content"]));
+        }
+        return newsItems;
       }
-      return newsItems;
-    }
+    });
   }
 
-  void helper() async {
-    await getNews();
+  Future<void> checkConnection() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isEmpty || result[0].rawAddress.isEmpty) {
+        connectionExists = false;
+      }
+      else {
+        connectionExists = true;
+        setState(() {});
+      }
+    } on SocketException catch (e) {
+      print(e);
+      connectionExists = false;
+    }
   }
 
   @override
   void initState() {
     super.initState();
+    checkConnection();
   }
 
   @override
@@ -60,10 +75,9 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin{
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
-          child: FutureBuilder(
+          child: connectionExists == true? FutureBuilder(
             builder: (context, snap) {
-              if (snap.connectionState == ConnectionState.none &&
-                  snap.hasData == null) {
+              if (snap.connectionState == ConnectionState.none) {
                 return Container();
               }
               return ListView.builder(
@@ -74,12 +88,17 @@ class _NewsFeedState extends State<NewsFeed> with AutomaticKeepAliveClientMixin{
                   });
             },
             future: getNews(),
+          ):SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Container(
+                child: NewsItem("Unavailable", "No Internet Access", "", "___", "Please connect to the Internet")),
           ),
           onRefresh: () async {
             try {
               final result = await InternetAddress.lookup('google.com');
               if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-                return getNews();
+                  connectionExists = true;
+                  setState(() {});
               }
             } on SocketException catch (e) {
               //print(e);

@@ -57,9 +57,11 @@ class _TimeWidgetState extends State<TimeWidget> {
   void _getTime() {
     final String formattedDateTime =
         DateFormat('h:mm a\nEEEE,MMM d').format(DateTime.now()).toString();
-    setState(() {
-      _timeString = formattedDateTime;
-    });
+    if(mounted) {
+      setState(() {
+        _timeString = formattedDateTime;
+      });
+    }
   }
 
   Widget build(BuildContext context) {
@@ -111,12 +113,9 @@ class NewsItem extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10,bottom: 0),
             child: Column(
                 children: [
-                  // Container(
-                  //   child: Text(heading),
-                  // ),
                   Row(children: [
                     Container(
-                      child: Image.network(imgUrl),
+                      child: imgUrl==""?Image.asset('assets/error.jpg'):Image.network(imgUrl),
                       height: 150,
                       width: 170,
                     ),
@@ -130,7 +129,9 @@ class NewsItem extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(top: 20,bottom: 0),
                             width: 190,
-                            child: Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold),),
+                            child: heading == "No Internet Access"?Center(
+                              child: Text(heading),
+                            ):Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                           SizedBox(
                             height: 16,
