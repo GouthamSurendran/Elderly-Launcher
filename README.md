@@ -1,16 +1,51 @@
-# senior_launcher
+# Elderly Launcher
+### _Android Launcher app for Seniors_
 
-A Simplified smartphone Launcher Application for Elders.
+`Version : 1.0.0`
 
-## Getting Started
+Elderly Launcher is a Simplified, Uncomplicated android launcher that aims to make the usage of smartphones easier and less complex for senior citizens who find it difficult to use the default launcher.
 
-This project is a starting point for a Flutter application.
+&nbsp;
 
-A few resources to get you started if this is your first Flutter project:
+## Features
+&nbsp;
+- Simple UI
+- Select and display specific Apps in the apps menu
+- Close and Emergency contacts with pictures - Click to call functionality
+- Medicine Reminder and Details, resets ticked off medicines next day
+- News Feed and News description page upon clicking read more
+- More Features to be added ...
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+&nbsp;
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Some screenshots of the App
+
+&nbsp;
+
+<img src='./screenshots/1.png' width='250' padding-right='10px'> &nbsp;&nbsp; 
+<img src='./screenshots/2.png' width='250'>
+<br><br>
+<img src='./screenshots/3.jpg' width='250'> &nbsp;&nbsp;
+<img src='./screenshots/7.png' width='250'>
+<br><br>
+<img src='./screenshots/4.png' width='250'> &nbsp;&nbsp;
+<img src='./screenshots/5.png' width='250'>
+<br><br>
+
+
+## Tech
+
+<br>
+
+|  |  |
+| ------ | ------ |
+| Language | Dart |
+| Framework | Flutter |
+| APIs called | Newsapi |
+| Database | Sqflite |
+| Key-Value storage | Shared Preferences |
+<br>
+
+## License
+
+[GNU General Public License v3.0](/LICENSE)
