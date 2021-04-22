@@ -28,10 +28,11 @@ class _ContactsPageState extends State<ContactsPage>
 
   getAllContacts() async {
     List<Contact> _contacts = (await ContactsService.getContacts()).toList();
-    filteredContacts = _contacts
-        .where((i) => i.avatar != null && i.avatar.length > 0)
-        .toList();
-    setState(() {});
+    setState(() {
+      filteredContacts = _contacts
+          .where((i) => i.avatar != null && i.avatar.length > 0)
+          .toList();
+    });
   }
 
   _callNumber(dynamic number) async {

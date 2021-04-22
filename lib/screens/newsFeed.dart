@@ -91,7 +91,13 @@ class _NewsFeedState extends State<NewsFeed>
           ):SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             child: Container(
-                child: NewsItem("Unavailable", "No Internet Access", "", "___", "Please connect to the Internet")),
+                child: Column(
+                  children: [
+                    Padding(padding: EdgeInsets.only(top: 20)),
+                    Text("Network Error !",style: TextStyle(fontSize: 18),),
+                    Center(child: NewsItem("Unavailable", "No Internet Access", "", "___", "Please connect to the Internet")),
+                  ],
+                )),
           ),
           onRefresh: () async {
             try {

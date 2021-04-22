@@ -115,8 +115,8 @@ class NewsItem extends StatelessWidget {
                 children: [
                   Row(children: [
                     Container(
-                      child: imgUrl==""?Image.asset('assets/error.jpg'):Image.network(imgUrl),
-                      height: 150,
+                      child: imgUrl==""?Image.asset('assets/error.png',height: 200,width: 50,):Image.network(imgUrl),
+                      height: 100,
                       width: 170,
                     ),
                     SizedBox(
@@ -138,8 +138,8 @@ class NewsItem extends StatelessWidget {
                           ),
                           Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
                           TextButton(
-                            child: Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
-                            onPressed: () {
+                            child: imgUrl==""?Text("Check Connection"):Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
+                            onPressed: imgUrl == ""? null:() {
                               // this builds a new window with current news's content as argument
                               Navigator.push(context, MaterialPageRoute(builder: (context){
                                 return MoreInfo(author,heading,imgUrl,content,fullUrl);
