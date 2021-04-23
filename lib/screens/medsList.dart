@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_launcher/databaseHelper.dart';
 import 'package:senior_launcher/medsWidget.dart';
@@ -59,9 +60,12 @@ class _MedsListState extends State<MedsList> {
 
   Future<void> showEditDialog(BuildContext context, snapshot, index) async {
     return showDialog(
-        context: context,
-        builder: (context) {
+                context: context,
+                builder: (context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(22)
+            ),
             content: Container(
               height: 150,
               child: Column(
@@ -93,10 +97,10 @@ class _MedsListState extends State<MedsList> {
                       },
                       child: Text(
                         "Delete Med",
-                        style: TextStyle(color: Colors.redAccent),
+                        style: TextStyle(color: Colors.redAccent,fontWeight: FontWeight.w700),
                       )),
                   TextButton(
-                    child: Text("Update Medicine info"),
+                    child: Text("Update Medicine info",style: TextStyle(fontWeight: FontWeight.w700),),
                     onPressed: () {
                       editMed(snapshot.data[index].id, editNameController.text,
                           editDescController.text);
@@ -115,6 +119,9 @@ class _MedsListState extends State<MedsList> {
         context: context,
         builder: (context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(22)
+            ),
             content: Container(
               height: 150,
               child: Column(
@@ -139,7 +146,7 @@ class _MedsListState extends State<MedsList> {
             ),
             actions: <Widget>[
               TextButton(
-                child: Text("Add new Medicine"),
+                child: Text("Add new Medicine",style:TextStyle(fontWeight: FontWeight.w700)),
                 onPressed: () {
                   if (nameController.text != "") {
                     insertMed();

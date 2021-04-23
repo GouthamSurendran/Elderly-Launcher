@@ -36,7 +36,7 @@ class _ContactsPageState extends State<ContactsPage>
   }
 
   _callNumber(dynamic number) async {
-    bool res = await FlutterPhoneDirectCaller.callNumber(number);
+    await FlutterPhoneDirectCaller.callNumber(number);
   }
 
   // ignore: must_call_super
@@ -64,9 +64,63 @@ class _ContactsPageState extends State<ContactsPage>
                   Contact contact = filteredContacts[index];
                   return InkWell(
                     onTap: () async {
-                      _callNumber(contact.phones.isEmpty
-                          ? " "
-                          : contact.phones.elementAt(0).value);
+                      return showDialog(
+                          context: context, builder: (context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(22)
+                              ),
+                              content: Container(
+                                height: 200,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Card(
+                                      semanticContainer: true,
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      child: Image.memory(
+                                        contact.avatar,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      elevation: 2,
+                                      shadowColor: Colors.grey,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12)),
+                                    ),
+                                    Text("Are you sure you want to call ${contact.displayName.toUpperCase()} ?",style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.bold
+                                    ),),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
+                                            onPressed: (){
+                                              _callNumber(contact.phones.isEmpty
+                                                  ? " "
+                                                  : contact.phones.elementAt(0).value);
+                                              Navigator.pop(context);
+                                            },
+                                        child: Text("Yes",style: TextStyle(fontWeight: FontWeight.bold),),
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlueAccent),
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: (){
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("No",style: TextStyle(fontWeight: FontWeight.bold),),
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                      });
                     },
                     child: Column(
                       children: <Widget>[
@@ -78,7 +132,7 @@ class _ContactsPageState extends State<ContactsPage>
                                   contact.avatar,
                                   fit: BoxFit.fill,
                                 ),
-                                elevation: 5,
+                                elevation: 3,
                                 shadowColor: Colors.grey,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25)),
