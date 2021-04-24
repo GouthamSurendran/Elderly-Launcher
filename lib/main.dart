@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Elderly',
       theme: ThemeData(
         primaryColor: PrimaryColor,
-        textTheme: GoogleFonts.josefinSansTextTheme(
+        textTheme: GoogleFonts.aBeeZeeTextTheme(
           Theme.of(context).textTheme,
         ),
         //primarySwatch: Colors.blue,

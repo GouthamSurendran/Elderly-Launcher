@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_launcher/screens/appScreen.dart';
 import 'package:senior_launcher/screens/contacts.dart';
+import 'package:senior_launcher/screens/homeScreen.dart';
 import 'package:senior_launcher/screens/medsRem.dart';
 import 'package:senior_launcher/screens/newsFeed.dart';
-import 'package:senior_launcher/widgets.dart';
 
 class Pview extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _PviewState extends State<Pview> {
           controller: _controller,
           children: <Widget>[
             NewsFeed(),
-            TimeWidget(),
+            HomeScreen(),
             AppScreen(),
             ContactsPage(),
             MedsRem()

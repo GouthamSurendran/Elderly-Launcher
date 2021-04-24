@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'dart:async';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:senior_launcher/databaseHelper.dart';
 import 'package:senior_launcher/screens/moreInfo.dart';
 import 'package:senior_launcher/models/app.dart';
@@ -34,54 +31,6 @@ class CardWidget extends StatelessWidget {
             height: 10,
           ),
           Text(isDone == 1 ? "Done" : "Not Taken")
-        ],
-      ),
-    );
-  }
-}
-
-class TimeWidget extends StatefulWidget {
-  @override
-  _TimeWidgetState createState() => _TimeWidgetState();
-}
-
-class _TimeWidgetState extends State<TimeWidget> {
-  String _timeString;
-  @override
-  void initState() {
-    super.initState();
-    _getTime();
-    Timer.periodic(Duration(seconds: 10), (Timer t) => _getTime());
-  }
-
-  void _getTime() {
-    final String formattedDateTime =
-        DateFormat('h:mm a\nEEEE,MMM d').format(DateTime.now()).toString();
-    if(mounted) {
-      setState(() {
-        _timeString = formattedDateTime;
-      });
-    }
-  }
-
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 250,left: 10,right: 10),
-      child: Column(
-        children: [
-          Container(
-            child: Center(
-              child: Text(_timeString,
-                  style: GoogleFonts.josefinSans(
-                      fontSize: 48,
-                      color: Color(0xff333333),
-                      fontWeight: FontWeight.w600)),
-            ),
-          ),
-          Container(
-              child: Text('Elderly launcher v1.0',
-                  style: GoogleFonts.josefinSans(
-                      fontSize: 25, color: Colors.black87)))
         ],
       ),
     );
@@ -131,7 +80,7 @@ class NewsItem extends StatelessWidget {
                             width: 190,
                             child: heading == "No Internet Access"?Center(
                               child: Text(heading),
-                            ):Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold),),
+                            ):Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13 ),),
                           ),
                           SizedBox(
                             height: 16,

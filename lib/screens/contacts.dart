@@ -46,7 +46,7 @@ class _ContactsPageState extends State<ContactsPage>
         title: Center(
             child: Text(
           "Contacts",
-          style: GoogleFonts.josefinSans(color: Colors.black87, fontSize: 20),
+          style: GoogleFonts.aBeeZee(color: Colors.black87, fontSize: 20),
         )),
         backgroundColor: Color(0xffC0EDF7),
       ),
@@ -68,7 +68,7 @@ class _ContactsPageState extends State<ContactsPage>
                           context: context, builder: (context) {
                             return AlertDialog(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(22)
+                                borderRadius: BorderRadius.circular(10)
                               ),
                               content: Container(
                                 height: 200,
@@ -85,10 +85,10 @@ class _ContactsPageState extends State<ContactsPage>
                                       elevation: 2,
                                       shadowColor: Colors.grey,
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12)),
-                                    ),
-                                    Text("Are you sure you want to call ${contact.displayName.toUpperCase()} ?",style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.bold
+                                  borderRadius: BorderRadius.circular(10)),
+                              ),
+                                    Text("Call ${contact.displayName.toUpperCase()} ?",style: TextStyle(
+                                      fontSize: 18,fontWeight: FontWeight.bold
                                     ),),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
