@@ -49,7 +49,7 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 205,
         child: Card(
           margin: EdgeInsets.only(top: 6),
           shape: RoundedRectangleBorder(
@@ -80,15 +80,15 @@ class NewsItem extends StatelessWidget {
                             width: 190,
                             child: heading == "No Internet Access"?Center(
                               child: Text(heading),
-                            ):Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13 ),),
+                            ):Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12 ),),
                           ),
                           SizedBox(
                             height: 16,
                           ),
                           Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
                           TextButton(
-                            child: imgUrl==""?Text("Check Connection"):Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
-                            onPressed: imgUrl == ""? null:() {
+                            child: imgUrl=="" && author=="Unavailable"?Text("Check Connection"):Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
+                            onPressed: imgUrl == "" && author=="Unavailable"? null:() {
                               // this builds a new window with current news's content as argument
                               Navigator.push(context, MaterialPageRoute(builder: (context){
                                 return MoreInfo(author,heading,imgUrl,content,fullUrl);

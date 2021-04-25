@@ -61,19 +61,23 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             content: Container(
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextField(
-                    controller: id==1?numberController:numberController2,
+                    controller: id == 1 ? numberController : numberController2,
                     decoration:
                         InputDecoration(hintText: "Enter Emergency number $id"),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      dynamic number = id == 1 ? numberController.text : numberController2.text;
+                      dynamic number = id == 1
+                          ? numberController.text
+                          : numberController2.text;
                       setNum(number, id).then((value) {
                         getNums();
                       });
@@ -111,79 +115,92 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 25, color: Colors.black87))),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: 60,
-                width: MediaQuery.of(context).size.width * 0.3,
-                child: ElevatedButton(
-                  onPressed: () async{
-                    await FlutterPhoneDirectCaller.callNumber(num_1);
-                  },
-                  onLongPress: () {
-                    showEditDialog(1);
-                  },
-                  child: Text(
-                    "Emergency 1",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14),
-                  ),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.deepOrangeAccent)),
-                ),
-              ),
-              Container(
-                height: 120,
-                width: MediaQuery.of(context).size.width * 0.25,
-                child: ElevatedButton(
-                  onPressed: () {
-                    isLightOn = isLightOn == true ? false : true;
-                    isLightOn == true
-                        ? TorchCompat.turnOn()
-                        : TorchCompat.turnOff();
-                    setState(() {});
-                  },
-                  child: Icon(
-                    isLightOn == true
-                        ? IconData(62037, fontFamily: 'MaterialIcons')
-                        : IconData(57894, fontFamily: 'MaterialIcons'),
-                    size: 50,
-                    color:
-                        isLightOn == true ? Colors.yellowAccent : Colors.white,
-                  ),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.lightBlueAccent)),
-                ),
-              ),
-              Container(
-                height: 60,
-                width: MediaQuery.of(context).size.width * 0.3,
-                child: ElevatedButton(
-                  onPressed: () async{
-                    await FlutterPhoneDirectCaller.callNumber(num_2);
-                  },
-                  onLongPress: () {
-                    showEditDialog(2);
-                  },
-                  child: Text(
-                    "Emergency 2  ",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.deepOrangeAccent),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await FlutterPhoneDirectCaller.callNumber(num_1);
+                    },
+                    onLongPress: () {
+                      showEditDialog(1);
+                    },
+                    child: Text(
+                      "Emergency 1",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(26)),
+                        primary: Colors.deepOrangeAccent),
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  height: 120,
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      isLightOn = isLightOn == true ? false : true;
+                      isLightOn == true
+                          ? TorchCompat.turnOn()
+                          : TorchCompat.turnOff();
+                      setState(() {});
+                    },
+                    child: Stack(children: <Widget>[
+                      Icon(
+                        isLightOn == true
+                            ? IconData(62037, fontFamily: 'MaterialIcons')
+                            : IconData(57894, fontFamily: 'MaterialIcons'),
+                        size: 50,
+                        color: isLightOn == true
+                            ? Colors.yellowAccent
+                            : Colors.black54,
+                      ),
+                      Icon(
+                        IconData(57894, fontFamily: 'MaterialIcons'),
+                        size: 50,
+                        color: Colors.black38,
+                      ),
+                    ]),
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(26)),
+                        primary: Colors.white),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await FlutterPhoneDirectCaller.callNumber(num_2);
+                    },
+                    onLongPress: () {
+                      showEditDialog(2);
+                    },
+                    child: Text(
+                      "Emergency 2  ",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(26)),
+                        primary: Colors.deepOrangeAccent),
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

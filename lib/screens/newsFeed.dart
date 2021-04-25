@@ -107,7 +107,7 @@ class _NewsFeedState extends State<NewsFeed>
                   setState(() {});
               }
             } on SocketException catch (e) {
-              //print(e);
+              print(e);
             }
           },
         ),

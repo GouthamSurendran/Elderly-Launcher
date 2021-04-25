@@ -95,9 +95,9 @@ class _AppScreenState extends State<AppScreen>
           child: Icon(
             IconData(58727, fontFamily: 'MaterialIcons'),
             size: 35,
-            color: Colors.white,
+            color: Colors.black38,
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.white,
         ),
       ),
     );

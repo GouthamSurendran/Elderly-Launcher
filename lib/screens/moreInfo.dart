@@ -24,40 +24,42 @@ class MoreInfo extends StatelessWidget {
           ),
           title: Text("Source : $author",style: TextStyle(color: Colors.black87),),
         ),
-        body: Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: imgUrl==""?Image.asset('assets/error.jpg'):Image.network(imgUrl),
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10,top: 30,right: 2),
-                child: Text(heading==null?"Breaking News":heading,style: TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.bold
-                ),),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10,top: 20,right: 2),
-                child: Text(content==null?"No desc":content,style: TextStyle(
-                  fontSize: 18
-                ),),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10),
-                child: InkWell(child: Text("Full article at $fullUrl",style: TextStyle(fontSize: 15,color: Colors.blueAccent),),
-                onTap: (){
-                  launch(fullUrl);
-                },),
-              ),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: imgUrl==""?Image.asset('assets/error.png'):Image.network(imgUrl),
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15,top: 30,right: 10),
+                  child: Text(heading==null?"Breaking News":heading,style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold
+                  ),),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15,top: 20,right: 5),
+                  child: Text(content==null?"No desc":content,style: TextStyle(
+                    fontSize: 18
+                  ),),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 15,top: 20,right: 5),
+                  child: InkWell(child: Text("Full article at $fullUrl",style: TextStyle(fontSize: 15,color: Colors.blueAccent),),
+                  onTap: (){
+                    launch(fullUrl);
+                  },),
+                ),
+              ],
+            ),
           ),
         ),
     );

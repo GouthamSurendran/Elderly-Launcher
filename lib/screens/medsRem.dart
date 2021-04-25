@@ -121,23 +121,23 @@ class _MedsRemState extends State<MedsRem> {
                 isDone: isDone3,
               ),
             ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    width: double.infinity,
-                    height: 60,
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Need Help",
-                        style: TextStyle(fontSize: 24),
-                      ),
-                    )),
-              ),
-            )
+            // Expanded(
+            //   child: Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: Container(
+            //         margin: EdgeInsets.only(bottom: 10),
+            //         width: double.infinity,
+            //         height: 60,
+            //         padding: EdgeInsets.only(left: 10, right: 10),
+            //         child: ElevatedButton(
+            //           onPressed: () {},
+            //           child: Text(
+            //             "Need Help",
+            //             style: TextStyle(fontSize: 24),
+            //           ),
+            //         )),
+            //   ),
+            // )
           ],
         ),
       ),
