@@ -51,7 +51,13 @@ class _ContactsPageState extends State<ContactsPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: filteredContacts.length< 1? Container(
+          child: Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.white,
+            ),
+          ),
+        ):Column(
           children: <Widget>[
             Expanded(
               child: GridView.count(

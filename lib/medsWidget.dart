@@ -10,8 +10,7 @@ class MedsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 15),
-      width: double.infinity,
+      margin: EdgeInsets.only(top: 10, bottom: 15,left: 25,right: 25),
       padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       decoration: BoxDecoration(
           color: Color(0xffC0EDF7), borderRadius: BorderRadius.circular(25)),

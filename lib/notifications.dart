@@ -1,39 +1,60 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
-class NotificationService extends ChangeNotifier{
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
+class NotificationService extends ChangeNotifier {
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationPlugin =
+      FlutterLocalNotificationsPlugin();
 
-  Future initialize () async {
-    FlutterLocalNotificationsPlugin flutterLocalNotificationPlugin = FlutterLocalNotificationsPlugin();
+  Future initialize() async {
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation("Asia/Kolkata"));
+    FlutterLocalNotificationsPlugin flutterLocalNotificationPlugin =
+        FlutterLocalNotificationsPlugin();
 
-    AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings("ic_launcher");
-    IOSInitializationSettings iosInitializationSettings = IOSInitializationSettings();
+    AndroidInitializationSettings androidInitializationSettings =
+        AndroidInitializationSettings("ic_launcher");
+    IOSInitializationSettings iosInitializationSettings =
+        IOSInitializationSettings();
 
-    final InitializationSettings initializationSettings = InitializationSettings(
-      android:  androidInitializationSettings,
-      iOS: iosInitializationSettings
-    );
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: androidInitializationSettings,
+            iOS: iosInitializationSettings);
 
-    await flutterLocalNotificationPlugin.initialize(initializationSettings,onSelectNotification: (value){
-      print("");
-    });
+    await flutterLocalNotificationPlugin.initialize(initializationSettings,
+        );
   }
 
-  Future scheduledNotification() async {
-    var interval = RepeatInterval.everyMinute;
-    var bigPicture = BigPictureStyleInformation(
-      DrawableResourceAndroidBitmap("ic_launcher"),
-      largeIcon: DrawableResourceAndroidBitmap("ic_launcher"),
-      contentTitle: "Demo Image Notification",
-      summaryText: "This sums up the notification",
-      htmlFormatContent: true,
-      htmlFormatContentTitle: true
-    );
+  Future scheduledNotification(DateTime now) async {
     var android = AndroidNotificationDetails("id", "channel", "description");
-    var platform = new NotificationDetails(android: android);
+    final location = tz.getLocation("Asia/Kolkata");
+    final date = tz.TZDateTime.from(now, location);
 
-    await _flutterLocalNotificationPlugin.periodicallyShow(0, "Reminder for Medicine", "Tap to do something",interval , platform);
+    await _flutterLocalNotificationPlugin.zonedSchedule(
+        0,
+        "Reminder for Medicine",
+        "Tap for more info",
+        _nextInstanceOfReminder(date),
+        const NotificationDetails(
+            android: AndroidNotificationDetails('daily notification channel id',
+                'daily notification channel name', 'daily notification description')),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time
+    );
+  }
+
+  tz.TZDateTime _nextInstanceOfReminder(tz.TZDateTime dateTime) {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledDate =
+    tz.TZDateTime(tz.local, now.year, now.month, now.day, dateTime.hour,dateTime.minute);
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
   }
 
   Future cancelNotification() async {
