@@ -11,10 +11,11 @@ Elderly Launcher is a Simplified, Uncomplicated android launcher that aims to ma
 &nbsp;
 - Simple UI
 - Select and display specific Apps in the apps menu
-- Close and Emergency contacts with pictures - Click to call functionality
+- Few Important contacts with pictures - Click to call functionality
 - Medicine Reminder and Details, resets ticked off medicines next day
+- Schedule Notification for Medicine timings
 - News Feed and News description page upon clicking read more
-- More Features to be added ...
+- Flash light and 2 Emergency numbers on Homescreen
 
 &nbsp;
 
