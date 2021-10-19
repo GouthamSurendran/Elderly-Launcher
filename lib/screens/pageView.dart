@@ -27,11 +27,31 @@ class _PviewState extends State<Pview> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        // color: Color(0xffC0EDF7),
-        color: Colors.yellow,
+        color: Color(0xffC0EDF7),
         child: PageView(
           controller: _controller,
           children: <Widget>[
+            // Center(
+            //   child: Container(
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //       children: [
+            //         ElevatedButton(
+            //           onPressed: () {
+            //             final now = new DateTime.now();
+            //             notificationService.scheduledNotification(now);
+            //           },
+            //           child: Text("Click cheyy"),
+            //         ),
+            //         ElevatedButton(
+            //             onPressed: () {
+            //               notificationService.cancelNotification();
+            //             },
+            //             child: Text("Stop notifications"))
+            //       ],
+            //     ),
+            //   ),
+            // ),
             NewsFeed(),
             HomeScreen(),
             AppScreen(),
