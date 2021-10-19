@@ -11,6 +11,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 150,
       margin: EdgeInsets.only(top: 10, bottom: 15),
       width: 300,
       padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -19,18 +20,19 @@ class CardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             title,
             style: TextStyle(
-                fontSize: 26,
+                fontSize: 28,
                 color: Colors.black54,
                 fontWeight: FontWeight.w700),
           ),
           SizedBox(
             height: 10,
           ),
-          Text(isDone == 1 ? "Done" : "Not Taken")
+          Text(isDone == 1 ? "Done" : "Not Taken",style: TextStyle(fontSize: 20,color: Colors.orangeAccent,fontWeight: FontWeight.bold),)
         ],
       ),
     );

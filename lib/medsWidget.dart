@@ -13,7 +13,7 @@ class MedsWidget extends StatelessWidget {
       margin: EdgeInsets.only(top: 10, bottom: 15,left: 25,right: 25),
       padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       decoration: BoxDecoration(
-          color: Color(0xffC0EDF7), borderRadius: BorderRadius.circular(25)),
+          color: Colors.yellow, borderRadius: BorderRadius.circular(25)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -33,7 +33,7 @@ class MedsWidget extends StatelessWidget {
           Text(
             desc,
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w600, color: Colors.blue),
+                fontSize: 22, fontWeight: FontWeight.bold, color: Colors.deepOrangeAccent),
           )
         ],
       ),

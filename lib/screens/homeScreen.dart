@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _getTime() {
     final String formattedDateTime =
-        DateFormat('   h:mm a\nEEEE,MMM d').format(DateTime.now()).toString();
+        DateFormat('   h:mm a\nEEEE, MMM d').format(DateTime.now()).toString();
     if (mounted) {
       setState(() {
         _timeString = formattedDateTime;
@@ -74,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         InputDecoration(hintText: "Enter Emergency number $id"),
                   ),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.deepOrangeAccent),
                     onPressed: () {
                       dynamic number = id == 1
                           ? numberController.text

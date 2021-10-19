@@ -62,24 +62,24 @@ class _MedsListState extends State<MedsList> {
     super.dispose();
   }
 
-    TimeOfDay timeConvert(String normTime) {
-      int hour;
-      int minute;
-      String ampm = normTime.substring(normTime.length - 2);
-      String result = normTime.substring(0, normTime.indexOf(' '));
-      if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
-        hour = int.parse(result.split(':')[0]);
-        if (hour == 12) hour = 0;
-        minute = int.parse(result.split(":")[1]);
-      } else {
-        hour = int.parse(result.split(':')[0]) - 12;
-        if (hour <= 0) {
-          hour = 24 + hour;
-        }
-        minute = int.parse(result.split(":")[1]);
+  TimeOfDay timeConvert(String normTime) {
+    int hour;
+    int minute;
+    String ampm = normTime.substring(normTime.length - 2);
+    String result = normTime.substring(0, normTime.indexOf(' '));
+    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+      hour = int.parse(result.split(':')[0]);
+      if (hour == 12) hour = 0;
+      minute = int.parse(result.split(":")[1]);
+    } else {
+      hour = int.parse(result.split(':')[0]) - 12;
+      if (hour <= 0) {
+        hour = 24 + hour;
       }
-      return TimeOfDay(hour: hour, minute: minute);
+      minute = int.parse(result.split(":")[1]);
     }
+    return TimeOfDay(hour: hour, minute: minute);
+  }
 
   void getHasTaken() async {
     _hasTaken = await _dbHelper.getHasTaken(_timeOfDay);
@@ -238,11 +238,9 @@ class _MedsListState extends State<MedsList> {
   Future<String> getTimeFromSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     final timePref = prefs.getString('time_$_timeOfDay');
-    if (timePref != null) {
-
-    }
+    if (timePref != null) {}
     return timePref;
-  }                               // Using Shared Preferences to get the date of last checked
+  } // Using Shared Preferences to get the date of last checked
 
   Future<void> setTime(dynamic value) async {
     final prefs = await SharedPreferences.getInstance();
@@ -286,7 +284,7 @@ class _MedsListState extends State<MedsList> {
               child: IconButton(
                   icon: Icon(
                     IconData(58735, fontFamily: 'MaterialIcons'),
-                    color: Colors.green,
+                    color: Colors.orange,
                     size: 50,
                   ),
                   onPressed: () {
@@ -348,14 +346,15 @@ class _MedsListState extends State<MedsList> {
                 initialTime: givenTime,
                 initialEntryMode: TimePickerEntryMode.input,
               );
-              if(picked!=null){
+              if (picked != null) {
                 setTime(picked.format(context));
                 getTimeFromSharedPreferences().then((value) {
                   givenTime = timeConvert(value);
                   setState(() {});
                 });
                 final now = new DateTime.now();
-                DateTime dateTime = DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
+                DateTime dateTime = DateTime(
+                    now.year, now.month, now.day, picked.hour, picked.minute);
                 notificationService.scheduledNotification(dateTime);
               }
             },
@@ -364,7 +363,7 @@ class _MedsListState extends State<MedsList> {
               splashColor: Colors.greenAccent,
               onPressed: () {},
               child: Icon(IconData(0xea7f, fontFamily: 'MaterialIcons')),
-              backgroundColor: Colors.black54,
+              backgroundColor: Colors.deepOrangeAccent,
             ),
           ),
           FloatingActionButton(

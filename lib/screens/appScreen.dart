@@ -34,7 +34,7 @@ class _AppScreenState extends State<AppScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffC0EDF7),
+      backgroundColor: Colors.yellow,
       body: FutureBuilder(
         future: getFilteredApps(),
         builder: (context, snapshot) {
@@ -61,7 +61,7 @@ class _AppScreenState extends State<AppScreen>
                           "${allApps[index].appName}",
                           style: TextStyle(
                               color: Colors.black87,
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.w600),
                         )
                       ],
@@ -90,14 +90,14 @@ class _AppScreenState extends State<AppScreen>
           });
         },
         child: FloatingActionButton(
-          splashColor: Colors.greenAccent,
+          splashColor: Colors.orangeAccent,
           onPressed: () {},
           child: Icon(
             IconData(58727, fontFamily: 'MaterialIcons'),
             size: 35,
-            color: Colors.black38,
+            color: Colors.white,
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.deepOrangeAccent,
         ),
       ),
     );

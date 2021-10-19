@@ -47,7 +47,7 @@ class _ContactsPageState extends State<ContactsPage>
           "Contacts",
           style: GoogleFonts.aBeeZee(color: Colors.black87, fontSize: 20),
         )),
-        backgroundColor: Color(0xffC0EDF7),
+        backgroundColor: Colors.yellow,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
