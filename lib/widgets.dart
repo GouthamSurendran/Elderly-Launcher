@@ -49,14 +49,15 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 205,
         child: Card(
-          margin: EdgeInsets.only(top: 10,left: 10,right: 10,bottom: 10),
+          margin: EdgeInsets.only(top: 6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)
           ),
           elevation: 0.25,
           shadowColor: Colors.grey,
-          color: Colors.deepOrangeAccent,
+          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.only(top: 10,bottom: 0),
             child: Column(
@@ -64,6 +65,7 @@ class NewsItem extends StatelessWidget {
                   Row(children: [
                     Container(
                       child: imgUrl==""?Image.asset('assets/error.png',height: 200,width: 50,):Image.network(imgUrl),
+                      height: 100,
                       width: 170,
                     ),
                     SizedBox(
@@ -78,14 +80,14 @@ class NewsItem extends StatelessWidget {
                             width: 190,
                             child: heading == "No Internet Access"?Center(
                               child: Text(heading),
-                            ):Text(heading.length<=80?heading:"${heading.substring(0,80)}...",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white ),),
+                            ):Text(heading.length<=120?heading:"${heading.substring(0,120)}...",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12 ),),
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          Text(author,style: TextStyle(fontWeight: FontWeight.w600,color: Colors.white),),
+                          Text(author,style: TextStyle(fontWeight: FontWeight.w600),),
                           TextButton(
-                            child: imgUrl=="" && author=="Unavailable"?Text("Check Connection"):Text("Read More",style: TextStyle(fontWeight: FontWeight.w700,color: Colors.yellow,fontSize: 18),),
+                            child: imgUrl=="" && author=="Unavailable"?Text("Check Connection"):Text("Read More",style: TextStyle(fontWeight: FontWeight.w700),),
                             onPressed: imgUrl == "" && author=="Unavailable"? null:() {
                               // this builds a new window with current news's content as argument
                               Navigator.push(context, MaterialPageRoute(builder: (context){

@@ -73,7 +73,6 @@ class _NewsFeedState extends State<NewsFeed>
   // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow,
       body: SafeArea(
         child: RefreshIndicator(
           child: connectionExists == true? FutureBuilder(
