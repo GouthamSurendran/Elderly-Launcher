@@ -75,7 +75,7 @@ class _MedsRemState extends State<MedsRem> {
       child: SafeArea(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.all(25)),
+            Padding(padding: EdgeInsets.all(20)),
             Text(
               "Medicine Reminder",
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
